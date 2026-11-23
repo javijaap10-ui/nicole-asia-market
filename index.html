@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicole Asia Market V15 | Future Asia 3D</title>
+<style>
+:root{--red:#c92f3b;--red2:#ef6a72;--cream:#fff8ee;--ink:#24201e;--muted:#756c66;--card:#fff;--line:#eadfd4;--green:#25D366;--shadow:0 14px 40px #4a291416}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--cream);color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hide{display:none!important}
+.top{position:sticky;top:0;z-index:20;background:#fffdf9eF;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{width:min(1200px,94%);margin:auto;height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:950;letter-spacing:.035em}.brand b{color:var(--red)}.nav-actions{display:flex;gap:8px}
+.btn{border:0;border-radius:13px;padding:11px 15px;font-weight:850;background:#f2ebe6;color:var(--ink)}.btn.red{background:var(--red);color:#fff}.btn.dark{background:var(--ink);color:#fff}.btn.green{background:var(--green);color:#fff}.btn.outline{background:#fff;border:1px solid var(--line)}
+.hero{min-height:58vh;display:flex;align-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 82% 22%,#ffdca8 0,transparent 24%),radial-gradient(circle at 15% 80%,#ffc8cb 0,transparent 28%),linear-gradient(135deg,#fff8e9,#ffe9e1 55%,#fff0cd)}
+.hero:after{content:"🍜  🧋  🍡  🥢";position:absolute;right:3%;bottom:4%;font-size:clamp(55px,8vw,120px);opacity:.18;white-space:nowrap;transform:rotate(-5deg)}
+.hero-inner{width:min(1180px,92%);margin:auto;z-index:2;padding:58px 0}.eyebrow{font-size:12px;color:var(--red);font-weight:950;letter-spacing:.18em;text-transform:uppercase}
+h1{font-size:clamp(46px,7vw,86px);line-height:.92;margin:12px 0 20px;max-width:780px}h1 b{color:var(--red)}.hero p{font-size:19px;line-height:1.6;color:#5c504a;max-width:620px}
+.wrap{width:min(1180px,92%);margin:auto;padding:45px 0 90px}.head{display:flex;justify-content:space-between;align-items:end;gap:15px}.head h2{margin:0;font-size:31px}.head p{margin:6px 0 0;color:var(--muted)}
+.filters{display:grid;grid-template-columns:1fr auto;gap:12px;margin:24px 0}.search{border:1px solid var(--line);background:#fff;padding:14px 16px;border-radius:15px;outline:none}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 13px;font-weight:800}.chip.active{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 8px 30px #5d39250b;position:relative}.photo{height:220px;display:grid;place-items:center;background:linear-gradient(145deg,#fff0d7,#ffe4e6);font-size:78px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.tag{position:absolute;top:12px;left:12px;background:#fff;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:950;box-shadow:0 5px 18px #0001}.sold{position:absolute;inset:0;background:#211d1bc7;color:#fff;display:grid;place-items:center;font-weight:950;font-size:22px}
+.body{padding:17px}.cat{font-size:11px;color:var(--red);font-weight:950;letter-spacing:.09em;text-transform:uppercase}.body h3{margin:7px 0 6px;font-size:18px}.desc{font-size:14px;color:var(--muted);line-height:1.45;min-height:41px}.stock{font-size:12px;color:var(--muted);margin-top:8px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px}.price{font-size:23px;font-weight:950}
+.empty{grid-column:1/-1;text-align:center;padding:55px;color:var(--muted)}
+.fab{position:fixed;right:18px;bottom:18px;z-index:25;border:0;border-radius:999px;padding:15px 18px;background:var(--ink);color:#fff;font-weight:900;box-shadow:0 14px 35px #0004}.bubble{background:var(--red);padding:3px 8px;border-radius:999px;margin-left:5px}
+.overlay{display:none;position:fixed;inset:0;background:#0007;z-index:40}.overlay.show{display:block}.drawer{position:fixed;top:0;right:-460px;width:min(430px,100%);height:100%;background:#fff;z-index:50;transition:.28s;padding:23px;display:flex;flex-direction:column;box-shadow:-15px 0 40px #0002}.drawer.open{right:0}.drawer-head{display:flex;justify-content:space-between;align-items:center}.drawer-head h2{margin:0}.x{border:0;width:40px;height:40px;border-radius:50%;background:#f3ece7;font-size:20px}.cart-list{flex:1;overflow:auto;margin:18px 0}.cart-item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:13px 0;border-bottom:1px solid var(--line)}.cart-item small{color:var(--muted)}.qty{display:flex;gap:7px;align-items:center}.qty button{border:0;background:#f3ece7;width:29px;height:29px;border-radius:8px}.total{display:flex;justify-content:space-between;font-size:22px;font-weight:950;margin:13px 0}
+.modal{display:none;position:fixed;inset:0;z-index:70;background:#0008;padding:22px;overflow:auto}.modal.show{display:flex;align-items:flex-start;justify-content:center}.panel{width:min(1000px,100%);background:#fff;border-radius:24px;padding:24px;margin:auto;box-shadow:var(--shadow)}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{margin:0}.admin-grid{display:grid;grid-template-columns:380px 1fr;gap:24px;margin-top:20px}.form{background:#faf6f2;border:1px solid var(--line);border-radius:18px;padding:17px}.form label{display:block;font-size:12px;font-weight:900;margin:12px 0 6px}.form input,.form textarea,.form select{width:100%;border:1px solid var(--line);background:#fff;padding:11px 12px;border-radius:11px}.form textarea{min-height:80px;resize:vertical}.preview{height:180px;border:2px dashed #dccdc1;border-radius:14px;margin-top:10px;display:grid;place-items:center;overflow:hidden;color:var(--muted);background:#fff}.preview img{width:100%;height:100%;object-fit:cover}.form-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.admin-products{max-height:650px;overflow:auto}.admin-card{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:11px 0}.thumb{width:70px;height:65px;border-radius:12px;background:#f5ece6;display:grid;place-items:center;font-size:30px;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}.admin-card small{color:var(--muted)}.mini-actions{display:flex;gap:6px}.mini-actions button{border:0;padding:8px;border-radius:9px}.danger{background:#ffe5e5;color:#9e2525}.edit{background:#eee9ff;color:#51418e}
+.checkout-modal .panel{width:min(560px,100%)}.checkout-form{display:grid;gap:10px;margin-top:18px}.checkout-form input,.checkout-form select,.checkout-form textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px}.summary{background:#faf6f2;border-radius:14px;padding:14px;margin-top:10px;white-space:pre-line;line-height:1.55}
+footer{background:#211d1b;color:#fff;text-align:center;padding:38px 5%}footer p{color:#bdb2ab}.notice{background:#fff1cf;border:1px solid #edd18a;padding:15px;border-radius:14px;margin-top:28px;color:#685327}
+
+.detail-panel{width:min(920px,100%);padding:0;overflow:hidden}
+.detail-grid{display:grid;grid-template-columns:1.05fr 1fr}
+.detail-image{min-height:480px;background:linear-gradient(145deg,#fff0d7,#ffe4e6);display:grid;place-items:center;font-size:120px;position:relative;overflow:hidden}
+.detail-image img{width:100%;height:100%;min-height:480px;object-fit:cover}
+.detail-content{padding:34px;position:relative}
+.detail-content .x{position:absolute;right:20px;top:20px}
+.detail-content h2{font-size:34px;margin:12px 45px 10px 0}
+.detail-desc{color:var(--muted);font-size:16px;line-height:1.65}
+.detail-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.info-box{background:#faf6f2;border:1px solid var(--line);padding:13px;border-radius:13px}
+.info-box small{display:block;color:var(--muted);margin-bottom:4px}.info-box strong{font-size:15px}
+.detail-price{font-size:34px;font-weight:950;color:var(--red);margin:18px 0}
+.buy-row{display:flex;gap:10px;align-items:center}.detail-qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff}
+.detail-qty button{border:0;background:#f5eee9;width:42px;height:46px;font-size:20px}.detail-qty span{min-width:42px;text-align:center;font-weight:900}
+.clickable{cursor:pointer}.details-link{border:0;background:transparent;color:var(--red);font-weight:900;padding:0;margin-top:10px}
+
+.variant-section{margin:18px 0}.variant-title{font-weight:900;margin-bottom:9px}
+.variant-options{display:grid;gap:8px}
+.variant-option{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;border:1px solid var(--line);background:#fff;padding:11px 12px;border-radius:12px;cursor:pointer}
+.variant-option:hover{border-color:#d7aaa8}.variant-option.selected{border:2px solid var(--red);background:#fff7f7}.variant-option.disabled{opacity:.5;cursor:not-allowed;background:#f5f3f2}
+.variant-option small{color:var(--muted)}
+.variant-pick{display:flex;align-items:center;gap:7px}
+.variant-pick button{border:0;background:#f3ece7;width:31px;height:31px;border-radius:8px;font-weight:900;font-size:17px}.variant-pick button:disabled{opacity:.35;cursor:not-allowed}
+.variant-pick span{min-width:25px;text-align:center;font-weight:950}
+.variant-option.hasqty{border:2px solid var(--red);background:#fff7f7}
+.variant-option.disabled .variant-pick button{pointer-events:none}
+.variant-admin{margin-top:13px;padding-top:12px;border-top:1px dashed #d8c9bf}.variant-row{display:grid;grid-template-columns:1fr 95px 42px;gap:7px;margin:7px 0}.variant-row input{margin:0!important}
+
+
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 8px}
+.admin-tab{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:11px;font-weight:900}
+.admin-tab.active{background:var(--ink);color:#fff}
+.admin-section{display:none}.admin-section.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.kpi{background:#faf6f2;border:1px solid var(--line);border-radius:15px;padding:15px}.kpi small{color:var(--muted);display:block}.kpi strong{font-size:23px;display:block;margin-top:5px}
+.data-table{width:100%;border-collapse:collapse;background:#fff}.data-table th,.data-table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.data-table th{background:#faf6f2}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px;margin-top:12px}
+.status{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:900}.status.pending{background:#fff1cf;color:#7b5d10}.status.done{background:#def5e7;color:#17633a}.status.cancel{background:#ffe3e3;color:#922}
+.low-stock{color:#b12b2b;font-weight:900}.admin-section h3{margin-bottom:5px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.kpi-grid{grid-template-columns:1fr}}
+
+
+.toast-cart{position:fixed;top:88px;right:22px;z-index:200;background:#211d1b;color:#fff;padding:14px 17px;border-radius:14px;box-shadow:0 15px 40px #0004;display:flex;gap:10px;align-items:center;max-width:min(390px,calc(100% - 30px));opacity:0;transform:translateY(-15px);pointer-events:none;transition:.25s}
+.toast-cart.show{opacity:1;transform:translateY(0)}.toast-cart .ok{background:#25D366;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:950}.toast-cart strong{display:block}.toast-cart small{color:#ddd}
+@media(max-width:560px){.toast-cart{top:72px;right:15px;left:15px;max-width:none}}
+
+@media(max-width:700px){.detail-grid{grid-template-columns:1fr}.detail-image{min-height:300px}.detail-image img{min-height:300px;max-height:360px}.detail-content{padding:24px}.detail-content h2{font-size:28px}.detail-info{grid-template-columns:1fr 1fr}}
+
+@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.nav{height:62px}.brand{font-size:14px}.nav-actions .admin-label{display:none}.hero{min-height:52vh}.hero-inner{padding:45px 0}h1{font-size:49px}.hero p{font-size:16px}.grid{grid-template-columns:1fr}.photo{height:270px}.head{align-items:start;flex-direction:column}.panel{padding:17px}.admin-card{grid-template-columns:58px 1fr}.thumb{width:58px;height:58px}.mini-actions{grid-column:2}.fab{right:12px;bottom:12px}}
+
+/* V15 Future Asia: presentación exclusivamente visual; conserva lógica V14 */
+html{scroll-padding-top:82px}
+body{background:radial-gradient(ellipse at 85% 0%,#39215e 0%,transparent 34%),radial-gradient(ellipse at 0% 35%,#14364c 0%,transparent 35%),#0b0b22;color:#f7f4ff}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.13;background-image:linear-gradient(#ffffff18 1px,transparent 1px),linear-gradient(90deg,#ffffff18 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(#000,transparent 90%)}
+.top{background:#0c0c26ed;border-bottom:1px solid #ffffff25;backdrop-filter:blur(18px)}
+.top .nav{min-height:75px;height:auto;padding:10px 0}
+.top .brand{color:#fff;font-size:19px;line-height:1.1}
+.top .brand b{color:#ff75b9}
+.v15-brand-sub{display:block;color:#65e7f4;font-size:9px;letter-spacing:2.7px;margin-top:5px}
+.top .btn.outline{background:#ffffff12;color:#fff;border:1px solid #ffffff35}
+.top .btn.dark{background:linear-gradient(115deg,#ff70b7,#6ce7f3);color:#160d2b}
+.top .btn{border-radius:24px}
+.v15-hero{min-height:0;background:none}
+.v15-hero::after{display:none}
+.v15-hero-inner{width:min(1180px,92%);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;min-height:570px;padding:62px 0 48px}
+.v15-eyebrow{display:inline-flex;align-items:center;color:#9cf4ff;font-weight:850;letter-spacing:2px;font-size:11px;background:#3ae4f414;padding:11px 14px;border:1px solid #3ae4f442;border-radius:30px}
+.v15-hero h1{font-size:clamp(44px,5.6vw,77px);line-height:1.04;letter-spacing:-2.7px;max-width:none;margin:22px 0;color:#fff}
+.v15-hero h1 em{font-style:normal;background:linear-gradient(90deg,#ff75b9,#9c83ff,#66e8f7);background-clip:text;color:transparent}
+.v15-hero p{font-size:18px;line-height:1.7;color:#b7b5d4;max-width:510px}
+.v15-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.v15-primary,.v15-secondary{font:inherit;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:28px;padding:15px 22px;font-weight:850}
+.v15-primary{border:0;color:#1b1028;background:linear-gradient(110deg,#ff8dc3,#64e7ff);box-shadow:0 8px 32px #ff4d9b42}
+.v15-secondary{color:#fff;border:1px solid #ffffff38;background:#ffffff0e}
+.v15-scene{position:relative;min-height:460px;display:grid;place-items:center;perspective:900px}
+.v15-halo{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#ff5ca750,#6736bb44 50%,transparent 70%);filter:blur(15px)}
+.v15-orbit{position:absolute;border:1px solid #ffffff35;border-radius:50%;width:390px;height:390px;transform:rotateX(68deg);box-shadow:0 0 60px #9b68ff35}
+.v15-panda-card{position:relative;width:min(390px,94%);height:405px;display:grid;place-items:center;border:1px solid #ffffff38;border-radius:40px;background:linear-gradient(145deg,#ffffff27,#ffffff08);box-shadow:0 30px 90px #0008,inset 0 1px #ffffff55;transform:rotateY(-9deg) rotateX(4deg);animation:v15float 5s ease-in-out infinite}
+.v15-panda{font-size:170px;line-height:1;filter:drop-shadow(0 25px 18px #0008);animation:v15nom 2.2s ease-in-out infinite;position:relative;z-index:2}
+.v15-ramen{position:absolute;bottom:34px;font-size:100px;filter:drop-shadow(0 12px 10px #0008);animation:v15float 3s ease-in-out infinite}
+.v15-steam{position:absolute;bottom:130px;font-size:35px;color:#fff9;animation:v15float 2s ease-in-out infinite}
+.v15-float-tag{position:absolute;padding:13px 16px;border:1px solid #ffffff35;border-radius:18px;background:#211b48ed;box-shadow:0 14px 40px #0005;font-size:13px;font-weight:800;color:#fff}
+.v15-tag-a{top:50px;right:-22px}.v15-tag-b{bottom:90px;left:-25px}
+.v15-spark{position:absolute;font-size:36px;animation:v15float 3s ease-in-out infinite}.v15-spark-a{top:12px;left:20px}.v15-spark-b{bottom:18px;right:15px}
+@keyframes v15float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes v15nom{0%,100%{transform:rotate(-4deg) scale(1)}50%{transform:rotate(4deg) scale(1.045)}}
+.v15-stats,.v15-universe{width:min(1180px,92%);margin-left:auto;margin-right:auto;position:relative}
+.v15-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:75px}
+.v15-stats>div{border:1px solid #ffffff22;background:#ffffff0b;padding:22px;border-radius:20px;display:flex;flex-direction:column;gap:8px}
+.v15-stats strong{font-size:27px}.v15-stats span{font-size:14px;color:#b7b5d4}
+.v15-heading h2{font-size:clamp(27px,3vw,37px);margin:0;color:#fff}.v15-heading p{color:#b7b5d4;margin:8px 0 0}
+.v15-characters{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}
+.v15-character{min-width:0;padding:24px;border:1px solid #ffffff29;border-radius:26px;background:linear-gradient(145deg,#ffffff18,#ffffff07);box-shadow:0 20px 50px #0002;transition:transform .25s,box-shadow .25s}
+.v15-character:hover{transform:translateY(-7px);box-shadow:0 25px 55px #0005}
+.v15-label{display:inline-block;color:#94efff;border:1px solid #45e6f454;background:#45e6f415;padding:8px 11px;border-radius:22px;font-size:10px;font-weight:900;letter-spacing:1px}
+.v15-figure{display:grid;place-items:center;font-size:75px;min-height:170px;filter:drop-shadow(0 16px 10px #0006)}
+.v15-character h3{font-size:21px;margin:5px 0 9px;color:#fff}
+.v15-character p{color:#b7b5d4;font-size:14px;line-height:1.6;min-height:68px}
+.v15-character a{color:#8debf8;font-weight:800;text-decoration:none}
+#catalogo.wrap{position:relative;padding-top:85px}
+#catalogo .head h2{color:#fff;font-size:clamp(28px,3vw,37px)}
+#catalogo .head p{color:#b7b5d4}
+#catalogo .search{background:#ffffff12;color:#fff;border:1px solid #ffffff40}
+#catalogo .search::placeholder{color:#d3d0e3}
+#catalogo .chip{background:#ffffff13;color:#f6f1ff;border:1px solid #ffffff30}
+#catalogo .chip.active{background:linear-gradient(115deg,#ff8dc3,#64e7ff);color:#20112b;border-color:transparent}
+#catalogo .card{background:#181733;border-color:#ffffff29;color:#fff;box-shadow:0 15px 40px #0004;transition:transform .22s,box-shadow .22s}
+#catalogo .card:hover{transform:translateY(-6px);box-shadow:0 23px 50px #0008}
+#catalogo .photo{background:linear-gradient(145deg,#33275d,#183a50)}
+#catalogo .body h3,#catalogo .price{color:#fff}
+#catalogo .desc,#catalogo .stock{color:#b7b5d4}
+#catalogo .cat{color:#86e9f5}
+#catalogo .btn.red{background:linear-gradient(110deg,#ff8dc3,#64e7ff);color:#20112b}
+#catalogo .tag{color:#20112b}
+#catalogo .empty{color:#d5d0e7}
+.fab{background:linear-gradient(115deg,#ff70b7,#6ce7f3);color:#160d2b}
+.fab .bubble{background:#211b48;color:#fff}
+@media(max-width:850px){.v15-hero-inner{grid-template-columns:1fr;gap:0;padding:55px 0 30px}.v15-scene{min-height:410px}.v15-characters{grid-template-columns:1fr 1fr}.v15-stats{margin-bottom:55px}}
+@media(max-width:560px){.top .nav{gap:7px}.top .brand{font-size:13px}.v15-brand-sub{font-size:7px;letter-spacing:1.4px}.top .btn{padding:9px 10px;font-size:12px}.v15-hero h1{font-size:clamp(39px,10vw,54px);letter-spacing:-1.6px}.v15-hero p{font-size:16px}.v15-scene{min-height:345px}.v15-panda-card{height:310px;width:min(300px,90%)}.v15-panda{font-size:135px}.v15-ramen{font-size:77px;bottom:20px}.v15-steam{bottom:100px}.v15-orbit{width:300px;height:300px}.v15-halo{width:280px;height:280px}.v15-tag-a{right:-8px;top:30px}.v15-tag-b{left:-8px;bottom:55px}.v15-stats{grid-template-columns:1fr;gap:10px}.v15-stats>div{padding:14px 17px;flex-direction:row;align-items:center}.v15-stats strong{font-size:22px}.v15-characters{grid-template-columns:1fr}.v15-figure{min-height:125px;font-size:68px}.v15-character p{min-height:0}#catalogo.wrap{padding-top:65px}}
+@media(prefers-reduced-motion:reduce){.v15-panda-card,.v15-panda,.v15-ramen,.v15-steam,.v15-spark{animation:none!important}html{scroll-behavior:auto}}
+
+
+/* V15.2: portada compacta sin espacios muertos */
+.v15-hero-inner{min-height:0;padding:26px 0 12px;gap:24px;align-items:center}
+.v15-scene{min-height:315px}
+.v15-panda-card{height:290px;width:min(330px,94%)}
+.v15-panda{font-size:135px}
+.v15-ramen{font-size:78px;bottom:18px}
+.v15-steam{bottom:94px;font-size:27px}
+.v15-halo{width:300px;height:300px}
+.v15-orbit{width:310px;height:310px}
+.v15-tag-a{top:30px;right:-12px}
+.v15-tag-b{bottom:48px;left:-12px}
+.v15-hero h1{font-size:clamp(39px,4.5vw,63px);margin:15px 0}
+.v15-hero p{font-size:16px;line-height:1.55}
+.v15-actions{margin-top:19px}
+#catalogo.wrap{padding-top:22px}
+@media(max-width:850px){.v15-hero-inner{grid-template-columns:1fr 1fr;gap:16px;padding:24px 0 10px}.v15-scene{min-height:280px}.v15-panda-card{height:265px}.v15-panda{font-size:115px}.v15-ramen{font-size:65px}.v15-hero h1{font-size:clamp(32px,5vw,47px)}}
+@media(max-width:600px){.v15-hero-inner{grid-template-columns:1fr;gap:0;padding:28px 0 8px}.v15-scene{min-height:255px}.v15-panda-card{height:240px;width:min(270px,90%)}.v15-panda{font-size:108px}.v15-ramen{font-size:64px;bottom:13px}.v15-steam{bottom:75px}.v15-halo{width:230px;height:230px}.v15-orbit{width:240px;height:240px}.v15-hero h1{font-size:clamp(36px,9vw,48px)}#catalogo.wrap{padding-top:18px}}
+
+/* V15.3 — Contraste accesible en carrito y ventanas claras.
+   No cambia cálculos, eventos, sesiones ni API. */
+.drawer,.modal .panel{color:#24201e;color-scheme:light}
+.drawer .drawer-head h2{color:#211a2b;font-size:25px;letter-spacing:-.4px}
+.drawer .cart-item{color:#25202b}
+.drawer .cart-item strong,.drawer .cart-item b{color:#25202b}
+.drawer .cart-item small{color:#756c66}
+.drawer .qty{color:#25202b;font-weight:800}
+.drawer .qty button{color:#24201e}
+.drawer .total{color:#211a2b;background:#f4effa;border:1px solid #e5d9f2;border-radius:15px;padding:14px 16px;margin:12px 0 14px;align-items:center}
+.drawer #cartTotal{color:#9c246b;font-weight:950;font-size:27px;white-space:nowrap}
+.drawer .btn.outline{color:#24201e;background:#fff;border:1px solid #eadfd4}
+.modal .panel h2,.modal .panel h3,.modal .panel label,.modal .panel .panel-head{color:#24201e}
+.modal .panel input,.modal .panel textarea,.modal .panel select{color:#24201e}
+
+</style>
+</head>
+<body>
+<header class="top">
+ <nav class="nav">
+  <div class="brand">NICOLE <b>ASIA</b> MARKET<small class="v15-brand-sub">FUTURE ASIA • V15</small></div>
+  <div class="nav-actions">
+   <button class="btn outline" onclick="openPromoter()">🤝 Promotores</button>
+   <button class="btn outline" onclick="requestAdminAccess()">⚙️ <span class="admin-label">Administrar</span></button>
+   <button class="btn dark" onclick="openCart()">🛒 <span id="navCount">0</span></button>
+  </div>
+ </nav>
+</header>
+
+
+<section class="hero v15-hero" aria-label="Bienvenida a Nicole Asia Market">
+  <div class="hero-inner v15-hero-inner">
+    <div class="v15-hero-copy">
+      <span class="v15-eyebrow">✦ BIENVENIDO AL FUTURO ASIÁTICO</span>
+      <h1>Descubre Asia.<br><em>Saborea el futuro.</em></h1>
+      <p>Una experiencia llena de sabores, colores y personajes que cobran vida. ¡Tu próxima aventura asiática comienza aquí!</p>
+      <div class="v15-actions">
+        <button class="v15-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Explorar productos ✦</button>
+      </div>
+    </div>
+    <div class="v15-scene" aria-label="Panda animado disfrutando ramen">
+      <div class="v15-halo"></div><div class="v15-orbit"></div>
+      <div class="v15-panda-card">
+        <span class="v15-spark v15-spark-a">✨</span><span class="v15-spark v15-spark-b">🌸</span>
+        <span class="v15-panda">🐼</span><span class="v15-steam">♨ ♨</span><span class="v15-ramen">🍜</span>
+        <span class="v15-float-tag v15-tag-a">🍥 Ramen lover</span>
+        <span class="v15-float-tag v15-tag-b">💗 ¡Qué delicia!</span>
+      </div>
+    </div>
+  </div>
+</section>
+<main class="wrap" id="catalogo">
+ <div class="head"><div><h2>Favoritos del futuro 🚀</h2><p>Explora nuestros productos reales, filtra y agrega tus favoritos al carrito.</p></div></div>
+ <div class="filters">
+  <input id="search" class="search" placeholder="🔎 Buscar producto..." oninput="renderProducts()">
+  <div id="chips" class="chips"></div>
+ </div>
+ <section id="products" class="grid"></section>
+</main>
+
+<button class="fab" onclick="openCart()">🛒 Mi carrito <span class="bubble" id="cartCount">0</span></button>
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+ <div class="drawer-head"><h2>Mi carrito</h2><button class="x" onclick="closeCart()">×</button></div>
+ <div id="cartList" class="cart-list"></div>
+ <div class="total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+ <button class="btn green" onclick="openCheckout()">Continuar pedido</button>
+ <button class="btn outline" style="margin-top:8px" onclick="clearCart()">Vaciar carrito</button>
+</aside>
+
+
+
+<div class="modal" id="adminLoginModal">
+ <div class="panel" style="width:min(430px,100%);margin:auto">
+  <div class="panel-head"><div><h2>🔐 Acceso administrativo</h2><small>Nicole Asia Market</small></div><button class="x" onclick="closeAdminLogin()">×</button></div>
+  <div class="checkout-form">
+   <input id="adminPassword" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')validateAdmin()">
+   <button class="btn red" onclick="validateAdmin()">Ingresar</button>
+   <small id="adminError" style="color:#a32929;min-height:18px"></small>
+   <small style="color:var(--muted)">Acceso exclusivo para administración.</small>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="productModal">
+ <div class="panel detail-panel">
+  <div class="detail-grid">
+   <div class="detail-image" id="detailImage"></div>
+   <div class="detail-content">
+    <button class="x" onclick="closeProduct()">×</button>
+    <div class="cat" id="detailCategory"></div>
+    <h2 id="detailName"></h2>
+    <div class="detail-desc" id="detailDesc"></div>
+    <div class="detail-info">
+      <div class="info-box"><small>Disponibilidad</small><strong id="detailStock"></strong></div>
+      <div class="info-box"><small>Etiqueta</small><strong id="detailBadge"></strong></div>
+      <div class="info-box"><small>Categoría</small><strong id="detailCategory2"></strong></div>
+      <div class="info-box"><small>Compra</small><strong>Por unidad</strong></div>
+    </div>
+    
+     <div class="variant-section hide" id="detailVariantSection">
+      <div class="variant-title">Elige sabores y cantidades</div><small style="display:block;color:var(--muted);margin:-3px 0 10px">La disponibilidad descuenta automáticamente lo que ya tienes en el carrito.</small>
+      <div class="variant-options" id="detailVariants"></div>
+     </div>
+
+     <div class="detail-price" id="detailPrice"></div>
+    <div class="buy-row">
+      <div class="detail-qty" id="singleQtyControl"><button onclick="detailQtyChange(-1)">−</button><span id="detailQty">1</span><button onclick="detailQtyChange(1)">+</button></div>
+      <button class="btn red" id="detailAdd" onclick="addDetailToCart()">🛒 Agregar al carrito</button>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="adminModal">
+ <div class="panel">
+  <div class="panel-head"><div><h2>⚙️ Administración</h2><small>Nicole Asia Market · Control comercial</small></div><button class="x" onclick="closeAdmin()">×</button></div>
+   <div class="admin-tabs">
+    <button class="admin-tab active" id="tabBtnProducts" onclick="showAdminTab('products')">🛍️ Productos</button>
+    <button class="admin-tab" id="tabBtnOrders" onclick="showAdminTab('orders')">🧾 Pedidos</button>
+    <button class="admin-tab" id="tabBtnInventory" onclick="showAdminTab('inventory')">📦 Inventario</button>
+    <button class="admin-tab" id="tabBtnFinance" onclick="showAdminTab('finance')">📊 Finanzas</button>
+    <button class="admin-tab" id="tabBtnReferrals" onclick="showAdminTab('referrals');loadReferralsAdmin()">🤝 Promotores</button>
+    <button class="admin-tab" id="tabBtnSystem" onclick="showAdminTab('system')">⚙️ Sistema</button>
+   </div>
+   <div class="admin-section active" id="adminProductsSection">
+  
+  <div style="margin-top:18px;background:#f8f3ef;border:1px solid var(--line);border-radius:16px;padding:15px">
+   <strong>📲 WhatsApp del negocio</strong>
+   <p style="margin:5px 0 10px;color:var(--muted);font-size:13px">Puedes escribir el número ecuatoriano como 09XXXXXXXX o 5939XXXXXXXX. El sistema lo convertirá automáticamente al formato internacional de WhatsApp.</p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <input id="businessWhatsapp" inputmode="numeric" placeholder="Ej. 593991234567" style="flex:1;min-width:220px;border:1px solid var(--line);padding:11px 12px;border-radius:11px">
+    <button class="btn dark" onclick="saveWhatsapp()">Guardar WhatsApp</button>
+   </div>
+   <small id="waStatus" style="display:block;margin-top:8px;color:var(--muted)"></small>
+  </div>
+
+  
+  <div class="admin-grid">
+   <form class="form" id="productForm" onsubmit="saveProduct(event)">
+    <h3 id="formTitle" style="margin-top:0">Nuevo producto</h3>
+    <input type="hidden" id="pid">
+    <label>Nombre *</label><input id="pname" required placeholder="Ej. Buldak Carbonara">
+    <label>Categoría *</label>
+    <select id="pcategory" required><option>Tallarines</option><option>Bebidas</option><option>Snacks</option><option>Dulces</option><option>Artículos</option><option>Otros</option></select>
+    <label>Precio de venta *</label><input id="pprice" type="number" min="0" step="0.01" required placeholder="3.50">
+     <label>Costo de compra unitario *</label><input id="pcost" type="number" min="0" step="0.01" value="0" placeholder="Ej. 2.20">
+<small style="display:block;color:var(--muted);margin-top:-6px;margin-bottom:10px">Costo pagado por 1 unidad. Se usa para calcular la utilidad y luego puedes reemplazarlo según tu factura.</small>
+    <label>Stock *</label><input id="pstock" type="number" min="0" step="1" required value="1">
+    <label>Etiqueta</label><input id="pbadge" placeholder="Nuevo / Popular / Corea...">
+    <label>Descripción</label><textarea id="pdesc" placeholder="Características principales..."></textarea>
+
+     <div class="variant-admin">
+      <label style="margin-top:0">Sabores / Variantes</label>
+      <small style="color:var(--muted)">Opcional. Agrega cada sabor y el stock disponible. Si agregas sabores, el stock total se calculará automáticamente.</small>
+      <div id="variantRows"></div>
+      <button class="btn outline" type="button" style="margin-top:8px" onclick="addVariantRow()">＋ Agregar sabor</button>
+     </div>
+
+    <label>Fotografía</label><input id="pimage" type="file" accept="image/*" onchange="loadImage(event)">
+    <div class="preview" id="preview">📷 Selecciona una fotografía</div>
+    <div class="form-actions"><button class="btn red" id="saveProductBtn" type="submit">Guardar producto</button><button class="btn outline" type="button" onclick="resetForm()">Limpiar</button></div>
+   </form>
+   <div>
+    <div class="head"><div><h3 style="margin:0">Catálogo actual</h3><p id="adminCount"></p></div></div>
+    <div class="admin-products" id="adminProducts"></div>
+   </div>
+   </div>
+   </div>
+
+   <div class="admin-section" id="adminOrdersSection">
+    <h3>🧾 Pedidos</h3><p style="color:var(--muted);margin-top:0">Enviar a WhatsApp registra el pedido como pendiente. Confirma la venta únicamente cuando el pago/entrega esté verificado.</p>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>Pedido</th><th>Fecha</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+   </div>
+
+   <div class="admin-section" id="adminInventorySection">
+    <h3>📦 Inventario</h3><p style="color:var(--muted);margin-top:0">Existencias actuales por producto y sabor.</p>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>Producto</th><th>Variante</th><th>Stock actual</th><th>Costo/u.</th><th>Valor inventario</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+   </div>
+
+   <div class="admin-section" id="adminFinanceSection">
+    <h3>📊 Finanzas y ventas</h3>
+    <div class="kpi-grid">
+     <div class="kpi"><small>Ventas confirmadas</small><strong id="kpiSales">0</strong></div>
+     <div class="kpi"><small>Ingresos</small><strong id="kpiRevenue">$0.00</strong></div>
+     <div class="kpi"><small>Costo vendido</small><strong id="kpiCost">$0.00</strong></div>
+     <div class="kpi"><small>Utilidad bruta</small><strong id="kpiProfit">$0.00</strong></div>
+     <div class="kpi"><small>Valor inventario</small><strong id="kpiInventory">$0.00</strong></div>
+    </div>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>Venta</th><th>Fecha</th><th>Cliente</th><th>Ingreso</th><th>Costo</th><th>Utilidad</th></tr></thead><tbody id="financeBody"></tbody></table></div>
+   </div>
+
+   <div class="admin-section" id="adminReferralsSection"><h3>Promotores y retiros</h3><div id="referralsAdminData">Cargando…</div></div>
+   <div class="admin-section" id="adminSystemSection">
+    <h3 style="margin-bottom:4px">⚙️ Respaldo y conexión</h3>
+    <p style="color:var(--muted);margin-top:0">Herramientas de mantenimiento para respaldar el catálogo y administrar la conexión con la base central.</p>
+  <div style="margin-top:12px;background:#eef7ff;border:1px solid #cfe4f7;border-radius:16px;padding:15px">
+   <strong>💾 Respaldo del catálogo</strong>
+   <p style="margin:5px 0 10px;color:var(--muted);font-size:13px">
+     Exporta todos tus productos, precios, stock, descripciones y fotografías antes de cambiar de computadora o navegador.
+   </p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn dark" type="button" onclick="exportBackup()">⬇️ Exportar respaldo</button>
+    <label class="btn outline" style="display:inline-block;cursor:pointer">
+      ⬆️ Importar respaldo
+      <input id="backupFile" type="file" accept=".json,application/json" style="display:none" onchange="importBackup(event)">
+    </label>
+   </div>
+   <small id="backupStatus" style="display:block;margin-top:8px;color:var(--muted)"></small>
+  </div>
+
+  <div style="margin-top:12px;background:#eefaf3;border:1px solid #cce8d7;border-radius:16px;padding:15px">
+   <strong>☁️ Google Sheets · Base central</strong>
+   <p style="margin:5px 0 10px;color:var(--muted);font-size:13px">
+     Sincroniza el catálogo actual con Google Sheets y actualiza productos, pedidos y stock desde la base central.
+   </p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn dark" type="button" onclick="syncCatalogToCloud()">☁️ Sincronizar catálogo</button>
+    <button class="btn outline" type="button" onclick="refreshCloudData(true)">↻ Actualizar desde Sheets</button>
+   </div>
+   <small id="cloudStatus" style="display:block;margin-top:8px;color:var(--muted)">Comprobando conexión…</small>
+  </div>
+
+  <div style="margin-top:12px;background:#fff4f4;border:1px solid #efcaca;border-radius:16px;padding:15px">
+   <strong>🧹 Limpieza de datos de prueba</strong>
+   <p style="margin:5px 0 10px;color:var(--muted);font-size:13px">Uso temporal antes de iniciar las ventas reales. Restaura el stock descontado por ventas de prueba y elimina pedidos, detalle de pedidos, ventas y movimientos de stock. No elimina productos, sabores, precios, costos ni fotografías.</p>
+   <button class="btn danger" id="resetTestDataBtn" type="button" onclick="resetTestData()">🗑️ Borrar todos los pedidos de prueba</button>
+   <small id="resetTestDataStatus" style="display:block;margin-top:8px;color:var(--muted)"></small>
+  </div>
+
+   </div>
+
+ </div>
+</div>
+
+<div class="modal checkout-modal" id="checkoutModal">
+ <div class="panel">
+  <div class="panel-head"><h2>Finalizar pedido</h2><button class="x" onclick="closeCheckout()">×</button></div>
+  <div class="checkout-form">
+   <input id="cname" placeholder="Nombre y apellido">
+   <input id="cphone" placeholder="Teléfono">
+   <textarea id="caddress" placeholder="Dirección / sector / referencia"></textarea>
+   <select id="cdelivery"><option>Entrega a domicilio</option><option>Retiro / coordinar</option></select>
+   <select id="cpayment"><option>Efectivo</option><option>Transferencia</option><option>Coordinar pago</option></select>
+   <div class="summary" id="checkoutSummary"></div>
+   <button class="btn green" onclick="sendOrder()">📲 Enviar pedido por WhatsApp</button>
+    <small style="color:var(--muted);line-height:1.4">El pedido se abrirá en WhatsApp en una nueva pestaña. Si Chrome bloquea la pestaña, permite ventanas emergentes para este archivo.</small>
+  </div>
+ </div>
+</div>
+
+
+<div class="toast-cart" id="cartToast">
+ <div class="ok">✓</div>
+ <div><strong id="cartToastTitle">Agregado al carrito</strong><small id="cartToastText"></small></div>
+</div>
+
+<footer><strong>NICOLE ASIA MARKET</strong><p>Un pedacito de Asia, más cerca de ti.</p></footer>
+
+<div class="modal" id="promoterModal"><div class="panel" style="max-width:670px"><div class="panel-head"><h2>🤝 Programa de promotores</h2><button class="x" onclick="$('promoterModal').classList.remove('show')">×</button></div>
+<div id="promoterAuth" class="form"><label>Usuario</label><input id="promUser" autocomplete="username" placeholder="Tu usuario"><label>Contraseña (mínimo 10 caracteres)</label><input id="promPass" type="password" autocomplete="current-password"><div class="form-actions"><button class="btn green" onclick="promoterAuth('promoterLogin')">Iniciar sesión</button><button class="btn outline" onclick="promoterAuth('promoterRegister')">Registrarme como promotor</button></div></div>
+<div id="promoterPanel" style="display:none"><div id="promoterStats"></div><div class="form"><h3>Solicitar retiro</h3><label>Banco</label><select id="withdrawBank"><option>Banco Pichincha</option><option>Banco Guayaquil</option><option>Banco del Pacífico</option><option>Otro banco</option></select><label>Titular</label><input id="withdrawHolder"><label>Tipo de cuenta</label><select id="withdrawType"><option>Ahorros</option><option>Corriente</option></select><label>Número de cuenta</label><input id="withdrawAccount" inputmode="numeric"><label>Monto USD</label><input id="withdrawAmount" type="number" min="1" step="0.01"><button class="btn green" onclick="promoterWithdraw()">Solicitar retiro</button></div><div id="promoterHistory"></div><button class="btn outline" onclick="promoterLogout()">Cerrar sesión</button></div><p id="promoterMessage" style="color:#a32929"></p></div></div>
+<script>
+const starterProducts=[
+{id:101,name:"Buldak Carbonara",category:"Tallarines",price:3.50,stock:18,desc:"Tallarines coreanos cremosos con un toque picante.",badge:"Popular",emoji:"🍜",image:""},
+{id:102,name:"Shin Ramyun",category:"Tallarines",price:2.75,stock:15,desc:"Ramen coreano de sabor intenso y picante.",badge:"Corea",emoji:"🍜",image:""},
+{id:103,name:"Milkis Original",category:"Bebidas",price:2.50,stock:24,desc:"Bebida gaseosa coreana con suave sabor lácteo.",badge:"Fría",emoji:"🥤",image:""},
+{id:104,name:"Ramune",category:"Bebidas",price:2.90,stock:12,desc:"Refresco japonés clásico con botella de canica.",badge:"Japón",emoji:"🧃",image:""},
+{id:105,name:"Pocky Chocolate",category:"Snacks",price:2.25,stock:20,desc:"Palitos crujientes cubiertos con chocolate.",badge:"Favorito",emoji:"🍫",image:""},
+{id:106,name:"Mochi Mix",category:"Dulces",price:4.25,stock:10,desc:"Selección de mochis suaves con sabores variados.",badge:"Dulce",emoji:"🍡",image:""},
+{id:107,name:"Hello Panda",category:"Snacks",price:2.40,stock:17,desc:"Galletas crujientes rellenas de chocolate.",badge:"Snack",emoji:"🍪",image:""},
+{id:108,name:"Set de Palillos",category:"Artículos",price:5.50,stock:8,desc:"Set reutilizable de palillos de estilo asiático.",badge:"Nuevo",emoji:"🥢",image:""}
+];
+
+let products=JSON.parse(localStorage.getItem("nam_products")||"null")||starterProducts;
+let orders=JSON.parse(localStorage.getItem("nam_orders")||"[]");
+let cart=JSON.parse(localStorage.getItem("nam_cart")||"{}");
+let selected="Todos", tempImage="";
+
+const $=id=>document.getElementById(id);
+const money=n=>"$"+Number(n).toFixed(2);
+
+// URL de implementación proporcionada y verificada con ?action=ping el 22-11-2026.
+// El error "Acción POST no reconocida: adminLogin" exige publicar el backend V14; no se soluciona cambiando solo este HTML.
+const API_URL="https://script.google.com/macros/s/AKfycby7L_RtzVcJ_PAUOfjtG5wGV0QEcvdAcLQ-22Dja2pjY4R3U2ZnypCPamHwr8Ka1eM/exec";
+let cloudOnline=false;
+let adminToken=sessionStorage.getItem("nam_admin_token")||"";
+let promoterToken=sessionStorage.getItem("nam_promoter_token")||"";
+const REF_CODE=(new URLSearchParams(location.search).get("ref")||"").trim().toUpperCase();
+if(REF_CODE)localStorage.setItem("nam_ref_code",REF_CODE);
+
+function setCloudStatus(message,ok=true){
+ const el=$("cloudStatus");if(!el)return;
+ el.textContent=message;
+ el.style.color=ok?"#26734d":"#a13a32";
+}
+async function apiGet(action){
+ const token=adminToken||"";
+ const r=await fetch(`${API_URL}?action=${encodeURIComponent(action)}&token=${encodeURIComponent(token)}&t=${Date.now()}`,{cache:"no-store"});
+ if(!r.ok)throw new Error("HTTP "+r.status);
+ const data=await r.json();
+ if(!data.ok)throw new Error(data.error||"Error de Google Sheets");
+ return data;
+}
+async function apiPost(payload){
+ const r=await fetch(API_URL,{
+   method:"POST",
+   headers:{"Content-Type":"text/plain;charset=utf-8"},
+   body:JSON.stringify({...payload,token:payload.token||adminToken||""})
+ });
+ if(!r.ok)throw new Error("HTTP "+r.status);
+ const data=await r.json();
+ if(!data.ok){
+   const detail=String(data.error||"Error de Google Sheets");
+   if(payload.action==="adminLogin" && detail.includes("Acción POST no reconocida")){
+     throw new Error("La página está conectada, pero la implementación publicada de Apps Script no tiene adminLogin. En Apps Script ve a Implementar → Administrar implementaciones → Editar (lápiz) → Nueva versión → Implementar. Si persiste, comprueba que esta página use la URL /exec de esa misma implementación.");
+   }
+   throw new Error(detail);
+ }
+ return data.data;
+}
+function cloudProductPayload(p){
+ // Las imágenes Data URL siguen en localStorage: una celda de Sheets no es almacenamiento de imágenes.
+ const image=(typeof p.image==="string"&&!p.image.startsWith("data:"))?p.image:"";
+ return {
+   id:p.id,name:p.name,category:p.category,desc:p.desc||"",price:Number(p.price)||0,
+   cost:Number(p.cost)||0,stock:productStock(p),badge:p.badge||"",image,
+   emoji:p.emoji||"🛍️",status:"ACTIVO",
+   variants:normalizeVariants(p).map(v=>({name:v.name,stock:v.stock,cost:(v.cost===undefined||v.cost===null||v.cost==="")?(Number(p.cost)||0):(Number(v.cost)||0)}))
+ };
+}
+function normalizeCloudProduct(p){
+ const rawId=String(p.id??"");
+ const id=/^\d+$/.test(rawId)?Number(rawId):rawId;
+ const local=products.find(x=>String(x.id)===rawId)||products.find(x=>x.name===p.name);
+ return {
+   ...p,id,
+   image:p.image||local?.image||"",
+   cost:Number(p.cost)||0,price:Number(p.price)||0,stock:Number(p.stock)||0,
+   variants:Array.isArray(p.variants)?p.variants.map(v=>({...v,stock:Number(v.stock)||0,cost:Number(v.cost)||0})):[]
+ };
+}
+function normalizeCloudOrder(o){
+ const statusMap={PENDIENTE:"Pendiente",CONFIRMADA:"Confirmada",CANCELADO:"Cancelado"};
+ return {...o,status:statusMap[String(o.status||"").toUpperCase()]||o.status||"Pendiente"};
+}
+async function refreshCloudData(showMessage=false){
+ try{
+   const pRes=await apiGet("getProducts");const oRes=adminToken?await apiGet("getOrders"):{orders:null};
+   cloudOnline=true;
+   if(Array.isArray(pRes.products)&&pRes.products.length){
+     products=pRes.products.map(normalizeCloudProduct);
+     localStorage.setItem("nam_products",JSON.stringify(products));
+   }
+   if(Array.isArray(oRes.orders)){
+     orders=oRes.orders.map(normalizeCloudOrder);
+     localStorage.setItem("nam_orders",JSON.stringify(orders));
+   }
+   renderChips();renderProducts();renderCart();renderAdmin();renderAdminDashboard();
+   setCloudStatus(`✅ Conectado · ${pRes.products?.length||0} productos · ${oRes.orders?.length||0} pedidos`);
+   if(showMessage)showCartToast("☁️ Datos actualizados","Información recibida desde Google Sheets.");
+   return true;
+ }catch(err){
+   cloudOnline=false;
+   setCloudStatus("⚠️ Sin conexión con Sheets · se mantiene el respaldo local",false);
+   if(showMessage)alert("No se pudo actualizar desde Google Sheets.\n\n"+err.message);
+   return false;
+ }
+}
+async function syncCatalogToCloud(){
+ if(!products.length){alert("No hay productos para sincronizar.");return}
+ if(!confirm(`Se enviarán ${products.length} productos actuales a Google Sheets. ¿Continuar?`))return;
+ setCloudStatus("⏳ Sincronizando catálogo…");
+ try{
+   let done=0;
+   for(const p of products){
+     await apiPost({action:"saveProduct",product:cloudProductPayload(p)});
+     done++;
+     setCloudStatus(`⏳ Sincronizando ${done}/${products.length}…`);
+   }
+   await refreshCloudData(false);
+   setCloudStatus(`✅ Catálogo sincronizado: ${done} productos.`);
+   alert(`Catálogo sincronizado correctamente.\n${done} productos enviados a Google Sheets.`);
+ }catch(err){
+   setCloudStatus("⚠️ Sincronización incompleta: "+err.message,false);
+   alert("No se pudo completar la sincronización.\n\n"+err.message);
+ }
+}
+async function resetTestData(){
+ const btn=$("resetTestDataBtn"),status=$("resetTestDataStatus");
+ if(!btn||btn.disabled)return;
+ if(!confirm("⚠️ ¿Borrar TODOS los pedidos y ventas de prueba?\n\nEl sistema restaurará el stock correspondiente a las ventas confirmadas y conservará el catálogo."))return;
+ if(!confirm("ÚLTIMA CONFIRMACIÓN\n\nEsta acción limpiará PEDIDOS, DETALLE_PEDIDO, VENTAS y MOVIMIENTOS_STOCK.\n\n¿Deseas continuar?"))return;
+ const old=btn.innerHTML; btn.disabled=true; btn.innerHTML="⏳ Limpiando datos…"; btn.style.opacity=".7"; btn.style.cursor="wait";
+ if(status){status.textContent="⏳ Procesando limpieza en Google Sheets…";status.style.color="var(--muted)";}
+ try{
+   await apiPost({action:"resetTestData"});
+   orders=[]; cart={}; localStorage.setItem("nam_orders","[]"); localStorage.setItem("nam_cart","{}");
+   await refreshCloudData(false); renderCart(); renderAdminDashboard();
+   if(status){status.textContent="✅ Datos de prueba eliminados correctamente.";status.style.color="#26734d";}
+   showCartToast("✅ Limpieza completada","Pedidos y ventas de prueba eliminados.");
+   alert("Limpieza completada correctamente.\n\nSe conservaron productos, sabores, precios, costos y fotografías.");
+ }catch(err){
+   if(status){status.textContent="❌ No se pudo completar la limpieza.";status.style.color="#a13a32";}
+   alert("No se pudieron borrar los datos de prueba.\n\n"+err.message);
+ }finally{btn.disabled=false;btn.innerHTML=old;btn.style.opacity="1";btn.style.cursor="";}
+}
+
+function persist(){localStorage.setItem("nam_products",JSON.stringify(products));localStorage.setItem("nam_cart",JSON.stringify(cart));localStorage.setItem("nam_orders",JSON.stringify(orders))}
+function cats(){return ["Todos",...new Set(products.map(p=>p.category))]}
+function renderChips(){$("chips").innerHTML=cats().map(c=>`<button class="chip ${c===selected?"active":""}" onclick="setCat('${c.replace(/'/g,"\\'")}')">${c}</button>`).join("")}
+function setCat(c){selected=c;renderChips();renderProducts()}
+function renderProducts(){
+ const q=$("search").value.toLowerCase().trim();
+ const list=products.filter(p=>(selected==="Todos"||p.category===selected)&&(p.name+" "+p.category+" "+p.desc).toLowerCase().includes(q));
+ $("products").innerHTML=list.length?list.map(p=>`
+ <article class="card">
+  <div class="photo clickable" onclick="openProduct(${p.id})">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<span>${p.emoji||"🛍️"}</span>`}<div class="tag">${esc(p.badge||p.category)}</div>${productStock(p)<=0?'<div class="sold">AGOTADO</div>':''}</div>
+  <div class="body"><div class="cat">${esc(p.category)}</div><h3 class="clickable" onclick="openProduct(${p.id})">${esc(p.name)}</h3><div class="desc">${esc(p.desc||"")}</div><button class="details-link" onclick="openProduct(${p.id})">Ver detalles →</button><div class="stock">${productStock(p)>0?`Disponibles: ${productStock(p)}`:"Sin stock"}</div>
+  <div class="row"><div class="price">${money(p.price)}</div><button class="btn red" ${productStock(p)<=0?"disabled":""} id="addBtn${p.id}" onclick="addCart(${p.id})">+ Agregar</button></div></div>
+ </article>`).join(""):`<div class="empty">No encontramos productos.</div>`;
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+let cartToastTimer=null;
+function showCartToast(title,text=""){
+ $("cartToastTitle").textContent=title;
+ $("cartToastText").textContent=text;
+ $("cartToastText").style.display=text?"block":"none";
+ $("cartToast").classList.add("show");
+ clearTimeout(cartToastTimer);
+ cartToastTimer=setTimeout(()=>$("cartToast").classList.remove("show"),2300);
+}
+function flashAddButton(id){
+ const b=$("addBtn"+id);if(!b)return;
+ const old=b.innerHTML;b.innerHTML="✓ Agregado";b.disabled=true;
+ setTimeout(()=>{b.innerHTML=old;b.disabled=productStock(products.find(p=>p.id===id))<=0},1200);
+}
+
+function addCart(id){
+ const p=products.find(x=>x.id===id);if(!p||productStock(p)<=0)return;
+ if(normalizeVariants(p).length){openProduct(id);return}
+ const key=cartKey(id,""),q=Number(cart[key]||cart[id]||0);
+ if(q>=productStock(p)){showCartToast("Stock máximo en el carrito",`${p.name}: ${q} unidad${q===1?"":"es"}`);return}
+ delete cart[id];cart[key]=q+1;persist();renderCart();
+ showCartToast("✓ Producto agregado",`${p.name} · En carrito: ${q+1}`);
+ flashAddButton(id);
+}
+function parseCartKey(key){
+ if(String(key).includes("::")){const [id,...rest]=String(key).split("::");return {id:Number(id),variant:rest.join("::")}}
+ return {id:Number(key),variant:""};
+}
+function qty(key,d){
+ const info=parseCartKey(key),p=products.find(x=>x.id===info.id);if(!p)return;
+ const vs=normalizeVariants(p),max=vs.length?(vs.find(v=>v.name===info.variant)?.stock||0):productStock(p);
+ let n=Number(cart[key]||0)+d;if(n>max)n=max;if(n<=0)delete cart[key];else cart[key]=n;persist();renderCart()
+}
+function validCart(){
+ const fixed={};
+ Object.keys(cart).forEach(key=>{
+   const info=parseCartKey(key),p=products.find(x=>x.id===info.id);if(!p)return;
+   const vs=normalizeVariants(p);
+   if(vs.length&&!info.variant)return;
+   const max=vs.length?(vs.find(v=>v.name===info.variant)?.stock||0):productStock(p);
+   const n=Math.min(Number(cart[key]||0),max);
+   if(n>0)fixed[cartKey(p.id,info.variant)]=n;
+ });
+ cart=fixed;
+}
+function renderCart(){
+ validCart();const keys=Object.keys(cart);let total=0,count=0;
+ $("cartList").innerHTML=keys.length?keys.map(key=>{
+   const info=parseCartKey(key),p=products.find(x=>x.id===info.id),q=cart[key],s=p.price*q;total+=s;count+=q;
+   return `<div class="cart-item"><div><strong>${esc(p.name)}</strong>${info.variant?`<br><small>Sabor: <b>${esc(info.variant)}</b></small>`:""}<br><small>${money(p.price)} × ${q} = ${money(s)}</small></div><div class="qty"><button onclick="qty('${esc(key)}',-1)">−</button><b>${q}</b><button onclick="qty('${esc(key)}',1)">+</button></div></div>`
+ }).join(""):`<p style="color:#756c66">Tu carrito está vacío.</p>`;
+ $("cartTotal").textContent=money(total);$("cartCount").textContent=count;$("navCount").textContent=count;persist();
+}
+function openCart(){$("drawer").classList.add("open");$("overlay").classList.add("show")}
+function closeCart(){$("drawer").classList.remove("open");$("overlay").classList.remove("show")}
+function clearCart(){if(Object.keys(cart).length&&confirm("¿Vaciar todo el carrito?")){cart={};persist();renderCart()}}
+function openCheckout(){if(!Object.keys(cart).length){alert("Tu carrito está vacío.");return}closeCart();updateSummary();$("checkoutModal").classList.add("show")}
+function closeCheckout(){$("checkoutModal").classList.remove("show")}
+function orderText(){
+ let total=0;
+ const lines=Object.keys(cart).map(key=>{
+   const info=parseCartKey(key),p=products.find(x=>x.id===info.id),q=cart[key],s=p.price*q;total+=s;
+   return `• ${q} x ${p.name}${info.variant?` — Sabor: ${info.variant}`:""} — ${money(s)}`;
+ });
+ return {total,text:`${lines.join("\n")}\n\nTOTAL: ${money(total)}`};
+}
+function updateSummary(){$("checkoutSummary").textContent=orderText().text}
+function snapshotCart(){
+ return Object.keys(cart).map(key=>{
+   const info=parseCartKey(key),p=products.find(x=>x.id===info.id),q=Number(cart[key]||0);
+   return {productId:p.id,name:p.name,variant:info.variant||"",qty:q,price:Number(p.price),cost:Number(p.cost||0),subtotal:Number(p.price)*q};
+ });
+}
+async function sendOrder(){
+ const name=$("cname").value.trim(),phoneClient=$("cphone").value.trim(),address=$("caddress").value.trim();
+ if(!name||!phoneClient){alert("Ingresa al menos tu nombre y teléfono.");return}
+
+ const BUSINESS_WHATSAPP=normalizeEcuadorWhatsapp(localStorage.getItem("nam_business_whatsapp")||"");
+ if(!BUSINESS_WHATSAPP){alert("Aún no se ha configurado el WhatsApp del negocio.");return}
+ if(!/^5939\d{8}$/.test(BUSINESS_WHATSAPP)){alert("El WhatsApp del negocio no tiene un formato válido para Ecuador.");return}
+ localStorage.setItem("nam_business_whatsapp",BUSINESS_WHATSAPP);
+
+ const items=snapshotCart();
+ if(!items.length){alert("Tu carrito está vacío.");return}
+
+ const total=items.reduce((sum,x)=>sum+x.subtotal,0);
+ const orderId="NAM-"+Date.now().toString().slice(-8);
+ const order={
+   id:orderId,date:new Date().toISOString(),customer:name,phone:phoneClient,
+   address:address||"Por coordinar",delivery:$("cdelivery").value,
+   payment:$("cpayment").value,status:"Pendiente",items,total,referralCode:localStorage.getItem("nam_ref_code")||""
+ };
+
+ // IMPORTANTE: reservar la pestaña AHORA, dentro del clic del usuario.
+ // Así Chrome no la bloquea mientras esperamos la respuesta de Google Sheets.
+ const waWindow=window.open("about:blank","_blank");
+ if(!waWindow){
+   alert("Chrome bloqueó la ventana de WhatsApp.\n\nPermite ventanas emergentes para este archivo y vuelve a intentarlo.\nEl carrito NO se ha borrado.");
+   return;
+ }
+ try{
+   waWindow.document.write(`
+     <!doctype html><html><head><meta charset="utf-8"><title>Nicole Asia Market</title>
+     <style>body{font-family:Arial,sans-serif;padding:35px;text-align:center;color:#332b27}
+     .box{max-width:520px;margin:auto;padding:28px;border:1px solid #eee;border-radius:18px}
+     .spin{font-size:38px}</style></head><body><div class="box">
+     <div class="spin">⏳</div><h2>Registrando pedido…</h2>
+     <p>Espera un momento. Al confirmarse en Google Sheets se abrirá WhatsApp automáticamente.</p>
+     </div></body></html>`);
+   waWindow.document.close();
+ }catch(_){}
+
+ try{
+   showCartToast("☁️ Registrando pedido","Guardando en Google Sheets…");
+   await apiPost({action:"createOrder",order});
+   cloudOnline=true;
+ }catch(err){
+   try{waWindow.close()}catch(_){}
+   alert("No se pudo registrar el pedido en Google Sheets.\n\nNo se abrió WhatsApp y el carrito se conserva.\n\nDetalle: "+err.message);
+   return;
+ }
+
+ const idx=orders.findIndex(x=>x.id===orderId);
+ if(idx>=0)orders[idx]=order; else orders.unshift(order);
+ persist();renderAdminDashboard();
+
+ const lines=items.map(x=>`• ${x.qty} x ${x.name}${x.variant?` — Sabor: ${x.variant}`:""} — ${money(x.subtotal)}`).join("\n");
+ const msg=`Hola Nicole Asia Market 👋
+Quiero realizar el siguiente pedido:
+
+Pedido: ${orderId}
+
+${lines}
+
+TOTAL: ${money(total)}
+
+DATOS DEL CLIENTE
+Nombre: ${name}
+Teléfono: ${phoneClient}
+Dirección: ${address||"Por coordinar"}
+Entrega: ${$("cdelivery").value}
+Pago: ${$("cpayment").value}`;
+
+ const waUrl=`https://api.whatsapp.com/send?phone=${BUSINESS_WHATSAPP}&text=${encodeURIComponent(msg)}`;
+
+ // La pestaña ya existe; ahora la dirigimos a WhatsApp.
+ try{
+   waWindow.location.replace(waUrl);
+ }catch(err){
+   waWindow.location.href=waUrl;
+ }
+
+ cart={};persist();renderCart();closeCheckout();
+ $("cname").value="";$("cphone").value="";$("caddress").value="";
+ showCartToast("✓ Pedido registrado","Guardado en Google Sheets. Abriendo WhatsApp…");
+ setTimeout(()=>refreshCloudData(false),1200);
+}
+let activeProductId=null, detailQuantity=1, selectedVariant="", variantQuantities={};
+
+function normalizeVariants(p){
+ return Array.isArray(p?.variants)?p.variants.filter(v=>v&&String(v.name||"").trim()).map(v=>({name:String(v.name).trim(),stock:Math.max(0,Number(v.stock)||0)})):[];
+}
+function productStock(p){
+ const vs=normalizeVariants(p);
+ return vs.length?vs.reduce((s,v)=>s+v.stock,0):Math.max(0,Number(p.stock)||0);
+}
+function openProduct(id){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+ activeProductId=id;detailQuantity=1;selectedVariant="";variantQuantities={};
+ const totalStock=productStock(p),vs=normalizeVariants(p);
+ $("detailImage").innerHTML=p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<span>${p.emoji||"🛍️"}</span>`;
+ $("detailCategory").textContent=p.category||"";
+ $("detailCategory2").textContent=p.category||"";
+ $("detailName").textContent=p.name||"Producto";
+ $("detailDesc").textContent=p.desc||"Sin descripción adicional.";
+ $("detailStock").textContent=totalStock>0?`${totalStock} unidades disponibles`:"Agotado";
+ $("detailBadge").textContent=p.badge||"Producto";
+ $("detailPrice").textContent=money(p.price);
+ $("detailQty").textContent=1;
+
+ if(vs.length){
+   $("detailVariantSection").classList.remove("hide");
+   $("singleQtyControl").classList.add("hide");
+   vs.forEach((v,i)=>variantQuantities[i]=0);
+   $("detailVariants").innerHTML=vs.map((v,i)=>{
+    const key=cartKey(p.id,v.name),inCart=Number(cart[key]||0),available=Math.max(0,v.stock-inCart);
+    return `<div class="variant-option ${available<=0?"disabled":""}" id="variantOpt${i}">
+      <span>
+       <strong>${esc(v.name)}</strong><br>
+       <small>Stock: ${v.stock} · En carrito: <b id="variantCart${i}">${inCart}</b> · Disponible: <b id="variantAvail${i}">${available}</b></small>
+      </span>
+      <div class="variant-pick">
+       <button type="button" id="variantMinus${i}" disabled onclick="variantQtyChange(${i},-1)">−</button>
+       <span id="variantQty${i}">0</span>
+       <button type="button" id="variantPlus${i}" ${available<=0?"disabled":""} onclick="variantQtyChange(${i},1)">+</button>
+      </div>
+      <small id="variantState${i}">${available>0?"Elegir":"Sin disponibilidad"}</small>
+    </div>`;
+   }).join("");
+   $("detailAdd").textContent="🛒 Agregar selección al carrito";
+ }else{
+   $("detailVariantSection").classList.add("hide");
+   $("singleQtyControl").classList.remove("hide");
+   $("detailVariants").innerHTML="";
+   $("detailAdd").textContent=totalStock<=0?"Producto agotado":"🛒 Agregar al carrito";
+ }
+ $("detailAdd").disabled=totalStock<=0;
+ $("productModal").classList.add("show");
+}
+function variantQtyChange(index,delta){
+ const p=products.find(x=>x.id===activeProductId),vs=normalizeVariants(p),v=vs[index];
+ if(!v)return;
+ const key=cartKey(p.id,v.name),already=Number(cart[key]||0),available=Math.max(0,v.stock-already);
+ let n=Number(variantQuantities[index]||0)+delta;
+ n=Math.max(0,Math.min(available,n));
+ variantQuantities[index]=n;
+
+ const qtyEl=$("variantQty"+index),row=$("variantOpt"+index);
+ const minus=$("variantMinus"+index),plus=$("variantPlus"+index),state=$("variantState"+index);
+ if(qtyEl)qtyEl.textContent=n;
+ if(row)row.classList.toggle("hasqty",n>0);
+ if(minus)minus.disabled=n<=0;
+ if(plus)plus.disabled=(n>=available||available<=0);
+ if(state){
+   if(available<=0)state.textContent="Sin disponibilidad";
+   else if(n>0)state.textContent=`Seleccionando ${n}`;
+   else state.textContent="Elegir";
+ }
+}
+function selectVariant(index){ /* Compatibilidad con versiones anteriores */ }
+function closeProduct(){
+ $("productModal").classList.remove("show");activeProductId=null;detailQuantity=1;selectedVariant="";variantQuantities={};
+}
+function detailQtyChange(delta){
+ const p=products.find(x=>x.id===activeProductId);if(!p)return;
+ const maxStock=productStock(p);if(maxStock<=0)return;
+ const key=cartKey(p.id,""),already=Number(cart[key]||0),maxCanAdd=Math.max(0,maxStock-already);
+ detailQuantity=Math.max(1,Math.min(Math.max(1,maxCanAdd),detailQuantity+delta));
+ $("detailQty").textContent=detailQuantity;
+}
+function cartKey(id,variant=""){return `${id}::${variant||""}`}
+function addDetailToCart(){
+ const p=products.find(x=>x.id===activeProductId);if(!p)return;
+ const vs=normalizeVariants(p);
+ if(vs.length){
+   const chosen=vs.map((v,i)=>({v,i,q:Number(variantQuantities[i]||0)})).filter(x=>x.q>0);
+   if(!chosen.length){alert("Selecciona al menos 1 unidad de uno de los sabores.");return}
+   chosen.forEach(({v,q})=>{
+     const key=cartKey(p.id,v.name),current=Number(cart[key]||0),available=Math.max(0,v.stock-current);
+     if(available>0)cart[key]=current+Math.min(q,available);
+   });
+ }else{
+   const key=cartKey(p.id,""),current=Number(cart[key]||0),available=Math.max(0,productStock(p)-current);
+   if(available<=0){alert("Ya tienes todas las unidades disponibles en el carrito.");return}
+   cart[key]=current+Math.min(detailQuantity,available);
+ }
+ persist();renderCart();
+ const addedText=vs.length
+   ? vs.map((v,i)=>({name:v.name,q:Number(variantQuantities[i]||0)})).filter(x=>x.q>0).map(x=>`${x.name} × ${x.q}`).join(" · ")
+   : `${p.name} × ${detailQuantity}`;
+ closeProduct();
+ showCartToast("✓ Agregado al carrito",addedText);
+}
+function exportBackup(){
+ try{
+   const data={
+     app:"Nicole Asia Market",
+     version:1,
+     exportedAt:new Date().toISOString(),
+     products:products,
+     orders:orders,
+     whatsapp:localStorage.getItem("nam_business_whatsapp")||""
+   };
+   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+   const url=URL.createObjectURL(blob);
+   const a=document.createElement("a");
+   const stamp=new Date().toISOString().slice(0,10);
+   a.href=url;
+   a.download=`Nicole_Asia_Market_respaldo_${stamp}.json`;
+   document.body.appendChild(a);
+   a.click();
+   a.remove();
+   URL.revokeObjectURL(url);
+   $("backupStatus").textContent=`✅ Respaldo exportado: ${products.length} productos.`;
+ }catch(err){
+   $("backupStatus").textContent="⚠️ No se pudo exportar el respaldo.";
+ }
+}
+function importBackup(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=function(e){
+   try{
+     const data=JSON.parse(e.target.result);
+     if(!data||!Array.isArray(data.products))throw new Error("Formato inválido");
+     if(!confirm(`Se importarán ${data.products.length} productos y reemplazarán el catálogo actual. ¿Continuar?`)){
+       event.target.value="";
+       return;
+     }
+     products=data.products;
+     orders=Array.isArray(data.orders)?data.orders:orders;
+     localStorage.setItem("nam_products",JSON.stringify(products));
+     localStorage.setItem("nam_orders",JSON.stringify(orders));
+     if(data.whatsapp)localStorage.setItem("nam_business_whatsapp",String(data.whatsapp).replace(/\D/g,""));
+     cart={};
+     persist();
+     renderChips();renderProducts();renderCart();renderAdmin();renderAdminDashboard();loadWhatsappSetting();
+     $("backupStatus").textContent=`✅ Respaldo importado: ${products.length} productos.`;
+   }catch(err){
+     $("backupStatus").textContent="⚠️ El archivo seleccionado no es un respaldo válido.";
+   }
+   event.target.value="";
+ };
+ reader.readAsText(file);
+}
+
+
+
+let adminUnlocked=false;
+
+function requestAdminAccess(){
+ if(adminUnlocked){openAdmin();return}
+ $("adminPassword").value="";
+ $("adminError").textContent="";
+ $("adminLoginModal").classList.add("show");
+ setTimeout(()=>$("adminPassword").focus(),100);
+}
+function closeAdminLogin(){$("adminLoginModal").classList.remove("show")}
+async function validateAdmin(){
+ try{const auth=await apiPost({action:"adminLogin",password:$("adminPassword").value});adminToken=auth.token;sessionStorage.setItem("nam_admin_token",adminToken);
+   adminUnlocked=true;
+   closeAdminLogin();
+   await refreshCloudData();
+   openAdmin();
+ }catch(err){
+   $("adminError").textContent=err.message;
+   $("adminPassword").select();
+ }
+}
+function openAdmin(){
+ renderAdmin();
+ renderAdminDashboard();
+ loadWhatsappSetting();
+ $("adminModal").classList.add("show");
+}
+function normalizeEcuadorWhatsapp(value){
+ let n=String(value||"").replace(/\D/g,"");
+ if(n.startsWith("00593")) n=n.slice(2);
+ if(n.startsWith("09")&&n.length===10) n="593"+n.slice(1);
+ if(n.startsWith("9")&&n.length===9) n="593"+n;
+ return n;
+}
+
+function saveWhatsapp(){
+ const raw=$("businessWhatsapp").value.trim();
+ const n=normalizeEcuadorWhatsapp(raw);
+ if(!/^5939\d{8}$/.test(n)){
+   $("waStatus").textContent="⚠️ Número no válido. Puedes escribir 0992746812 o 593992746812.";
+   return;
+ }
+ localStorage.setItem("nam_business_whatsapp",n);
+ $("businessWhatsapp").value=n;
+ $("waStatus").textContent=`✅ WhatsApp guardado correctamente: +${n}`;
+}
+function loadWhatsappSetting(){
+ let n=localStorage.getItem("nam_business_whatsapp")||"";
+ if(n){
+   const fixed=normalizeEcuadorWhatsapp(n);
+   if(/^5939\d{8}$/.test(fixed)&&fixed!==n){
+     n=fixed;
+     localStorage.setItem("nam_business_whatsapp",n);
+   }
+ }
+ $("businessWhatsapp").value=n;
+ $("waStatus").textContent=n?`Configurado: +${n}`:"Todavía no hay un número configurado.";
+}
+function showAdminTab(tab){
+ const map={products:"Products",orders:"Orders",inventory:"Inventory",finance:"Finance",referrals:"Referrals",system:"System"};
+ Object.entries(map).forEach(([k,s])=>{
+   const sec=$("admin"+s+"Section"),btn=$("tabBtn"+s);
+   if(sec)sec.classList.toggle("active",k===tab);
+   if(btn)btn.classList.toggle("active",k===tab);
+ });
+ renderAdminDashboard();
+}
+function renderAdminDashboard(){
+ renderOrders();renderInventory();renderFinance();
+}
+function renderOrders(){
+ const body=$("ordersBody");if(!body)return;
+ body.innerHTML=orders.length?orders.map(o=>{
+  const detail=(o.items||[]).map(i=>`${i.qty}× ${esc(i.name)}${i.variant?` (${esc(i.variant)})`:""}`).join("<br>");
+  return `<tr>
+   <td><strong>${esc(o.id)}</strong><br><small>${detail}</small></td>
+   <td>${new Date(o.date).toLocaleString()}</td>
+   <td>${esc(o.customer)}<br><small>${esc(o.phone||"")}</small></td>
+   <td><strong>${money(o.total)}</strong></td>
+   <td><span class="status ${o.status==="Confirmada"?"done":o.status==="Cancelado"?"cancel":"pending"}">${esc(o.status)}</span></td>
+   <td>${o.status==="Pendiente"?`<button class="btn red" onclick="confirmSale('${o.id}')">✅ Confirmar venta</button> <button class="btn outline" onclick="cancelOrder('${o.id}')">Cancelar</button>`:o.status==="Procesando"?"⏳ Procesando…":"—"}</td>
+  </tr>`;
+ }).join(""):`<tr><td colspan="6">Todavía no hay pedidos registrados.</td></tr>`;
+}
+async function confirmSale(id){
+ const o=orders.find(x=>x.id===id);if(!o||o.status!=="Pendiente")return;
+ if(o._busy)return;
+ if(!confirm(`¿Confirmar la venta ${id} y descontar el stock en Google Sheets?`))return;
+
+ // Bloqueo visual inmediato para evitar dobles clics.
+ o._busy=true;
+ const oldStatus=o.status;
+ o.status="Procesando";
+ renderOrders();
+
+ try{
+   const result=await apiPost({action:"confirmSale",orderId:id});
+
+   // La API ya confirmó la venta: actualizar inmediatamente el estado local.
+   o.status="Confirmada";
+   o.confirmedAt=new Date().toISOString();
+   delete o._busy;
+   localStorage.setItem("nam_orders",JSON.stringify(orders));
+   renderOrders();
+
+   // Luego traer stock, pedidos y finanzas oficiales desde Sheets.
+   await refreshCloudData(false);
+   renderAdminDashboard();
+   showCartToast("✓ Venta confirmada",`${id} · stock y finanzas actualizados.`);
+ }catch(err){
+   o.status=oldStatus;
+   delete o._busy;
+   renderOrders();
+
+   // Si Sheets dice que ya estaba confirmada, refrescar para corregir la pantalla.
+   if(String(err.message||"").toLowerCase().includes("ya fue confirmada")){
+     await refreshCloudData(false);
+     renderAdminDashboard();
+   }
+   alert("No se pudo confirmar la venta.\n\n"+err.message);
+ }
+}
+
+async function cancelOrder(id){
+ const o=orders.find(x=>x.id===id);if(!o||o.status!=="Pendiente")return;
+ if(o._busy)return;
+ if(!confirm(`¿Cancelar el pedido ${o.id}?`))return;
+
+ o._busy=true;
+ const oldStatus=o.status;
+ o.status="Procesando";
+ renderOrders();
+
+ try{
+   await apiPost({action:"cancelOrder",orderId:id});
+   o.status="Cancelado";
+   delete o._busy;
+   localStorage.setItem("nam_orders",JSON.stringify(orders));
+   renderOrders();
+
+   await refreshCloudData(false);
+   renderAdminDashboard();
+   showCartToast("Pedido cancelado",id);
+ }catch(err){
+   o.status=oldStatus;
+   delete o._busy;
+   renderOrders();
+   alert("No se pudo cancelar el pedido.\n\n"+err.message);
+ }
+}
+function renderInventory(){
+ const body=$("inventoryBody");if(!body)return;const rows=[];
+ products.forEach(p=>{
+   const vs=normalizeVariants(p),cost=Number(p.cost||0);
+   if(vs.length)vs.forEach(v=>rows.push({name:p.name,variant:v.name,stock:v.stock,cost}));
+   else rows.push({name:p.name,variant:"—",stock:productStock(p),cost});
+ });
+ body.innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.variant)}</td><td class="${r.stock<=2?"low-stock":""}">${r.stock}</td><td>${money(r.cost)}</td><td>${money(r.stock*r.cost)}</td></tr>`).join("")||'<tr><td colspan="5">Sin productos.</td></tr>';
+}
+function renderFinance(){
+ const confirmed=orders.filter(o=>o.status==="Confirmada");
+ let revenue=0,cost=0;
+ confirmed.forEach(o=>o.items.forEach(i=>{revenue+=Number(i.subtotal||0);cost+=Number(i.cost||0)*Number(i.qty||0)}));
+ const inventory=products.reduce((sum,p)=>sum+productStock(p)*Number(p.cost||0),0);
+ if($("kpiSales"))$("kpiSales").textContent=confirmed.length;
+ if($("kpiRevenue"))$("kpiRevenue").textContent=money(revenue);
+ if($("kpiCost"))$("kpiCost").textContent=money(cost);
+ if($("kpiProfit"))$("kpiProfit").textContent=money(revenue-cost);
+ if($("kpiInventory"))$("kpiInventory").textContent=money(inventory);
+ const body=$("financeBody");if(!body)return;
+ body.innerHTML=confirmed.length?confirmed.map(o=>{
+   const c=o.items.reduce((s,i)=>s+Number(i.cost||0)*Number(i.qty||0),0);
+   return `<tr><td>${esc(o.id)}</td><td>${new Date(o.confirmedAt||o.date).toLocaleString()}</td><td>${esc(o.customer)}</td><td>${money(o.total)}</td><td>${money(c)}</td><td><strong>${money(o.total-c)}</strong></td></tr>`;
+ }).join(""):`<tr><td colspan="6">Aún no hay ventas confirmadas.</td></tr>`;
+}
+
+function closeAdmin(){$("adminModal").classList.remove("show");resetForm()}
+function loadImage(e){
+ const f=e.target.files[0];if(!f)return;
+ if(f.size>2.5*1024*1024){alert("Para este prototipo usa imágenes menores a 2.5 MB.");e.target.value="";return}
+ const r=new FileReader();r.onload=ev=>{tempImage=ev.target.result;$("preview").innerHTML=`<img src="${tempImage}" alt="Vista previa">`};r.readAsDataURL(f)
+}
+
+function addVariantRow(name="",stock=0,cost=""){
+ const wrap=document.createElement("div");wrap.className="variant-row";
+ const inherited=cost===""||cost===null||cost===undefined;
+ wrap.innerHTML=`<input class="vname" placeholder="Ej. Fresa" value="${esc(name)}"><input class="vstock" type="number" min="0" step="1" value="${Math.max(0,Number(stock)||0)}" placeholder="Stock"><input class="vcost" type="number" min="0" step="0.01" value="${inherited?"":Math.max(0,Number(cost)||0)}" placeholder="Costo"><button class="btn danger" type="button" onclick="this.parentElement.remove()">×</button>`;
+ $("variantRows").appendChild(wrap);
+}
+function getAdminVariants(){
+ const baseCost=Math.max(0,Number($("pcost").value)||0);
+ return [...document.querySelectorAll("#variantRows .variant-row")].map(r=>{
+   const raw=r.querySelector(".vcost")?.value;
+   return {name:r.querySelector(".vname").value.trim(),stock:Math.max(0,Number(r.querySelector(".vstock").value)||0),cost:raw===""?baseCost:Math.max(0,Number(raw)||0)};
+ }).filter(v=>v.name);
+}
+
+async function saveProduct(e){
+ e.preventDefault();
+ const btn=$("saveProductBtn");
+ if(btn?.disabled)return;
+
+ const originalText=btn?.innerHTML||"Guardar producto";
+ if(btn){
+   btn.disabled=true;
+   btn.innerHTML="⏳ Guardando...";
+   btn.style.opacity=".72";
+   btn.style.cursor="wait";
+ }
+ setCloudStatus("⏳ Guardando producto en Google Sheets…");
+
+ try{
+   const rawId=$("pid").value;
+   const id=rawId?( /^\d+$/.test(rawId)?Number(rawId):rawId ):Date.now();
+   const old=products.find(p=>String(p.id)===String(id));
+   const variants=getAdminVariants(),totalVariantStock=variants.reduce((sum,v)=>sum+v.stock,0);
+   const p={
+     id,
+     name:$("pname").value.trim(),
+     category:$("pcategory").value,
+     price:Number($("pprice").value),
+     cost:Number($("pcost").value)||0,
+     stock:variants.length?totalVariantStock:Number($("pstock").value),
+     badge:$("pbadge").value.trim(),
+     desc:$("pdesc").value.trim(),
+     emoji:old?.emoji||"🛍️",
+     image:tempImage||old?.image||"",
+     variants
+   };
+
+   await apiPost({action:"saveProduct",product:cloudProductPayload(p)});
+
+   if(old)products=products.map(x=>String(x.id)===String(id)?p:x);
+   else products.unshift(p);
+
+   persist();
+   renderChips();renderProducts();renderCart();renderAdmin();
+
+   setCloudStatus("✅ Producto guardado correctamente en Google Sheets.");
+   if(btn){
+     btn.innerHTML="✅ Guardado";
+     btn.style.opacity="1";
+     btn.style.cursor="default";
+   }
+   showCartToast("✅ Producto guardado",p.name);
+
+   // Pequeña confirmación visual antes de limpiar el formulario.
+   await new Promise(resolve=>setTimeout(resolve,900));
+   resetForm();
+
+ }catch(err){
+   setCloudStatus("❌ No se pudo guardar el producto.");
+   alert("No se pudo guardar el producto en Google Sheets.\n\n"+err.message);
+ }finally{
+   if(btn){
+     btn.disabled=false;
+     btn.innerHTML=originalText;
+     btn.style.opacity="1";
+     btn.style.cursor="";
+   }
+ }
+}
+
+function resetForm(){$("productForm").reset();$("pid").value="";$("pstock").value=1;$("pcost").value=0;tempImage="";$("variantRows").innerHTML="";$("preview").textContent="📷 Selecciona una fotografía";$("formTitle").textContent="Nuevo producto"}
+function editProduct(id){
+ const p=products.find(x=>String(x.id)===String(id));if(!p)return;$("pid").value=p.id;$("pname").value=p.name;$("pcategory").value=p.category;$("pprice").value=p.price;$("pcost").value=Number(p.cost||0);$("pstock").value=p.stock;$("pbadge").value=p.badge||"";$("pdesc").value=p.desc||"";tempImage=p.image||"";$("preview").innerHTML=p.image?`<img src="${p.image}">`:"Sin fotografía";$("variantRows").innerHTML="";normalizeVariants(p).forEach(v=>addVariantRow(v.name,v.stock,(v.cost===undefined||v.cost===null)?p.cost:v.cost));$("formTitle").textContent="Editar producto";$("productForm").scrollIntoView({behavior:"smooth",block:"start"})
+}
+async function deleteProduct(id){
+ const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+ if(!confirm(`¿Eliminar "${p.name}" de Google Sheets?`))return;
+ try{
+   await apiPost({action:"deleteProduct",productId:p.id});
+   products=products.filter(x=>String(x.id)!==String(id));
+   Object.keys(cart).forEach(k=>{if(String(parseCartKey(k).id)===String(id))delete cart[k]});
+   persist();renderChips();renderProducts();renderCart();renderAdmin();
+   showCartToast("Producto eliminado",p.name);
+ }catch(err){alert("No se pudo eliminar el producto.\n\n"+err.message)}
+}
+function renderAdmin(){
+ $("adminCount").textContent=`${products.length} productos`;
+ $("adminProducts").innerHTML=products.map(p=>`<div class="admin-card"><div class="thumb">${p.image?`<img src="${p.image}">`:(p.emoji||"🛍️")}</div><div><strong>${esc(p.name)}</strong><br><small>${esc(p.category)} · Venta ${money(p.price)} · Costo ${money(p.cost||0)} · Stock ${productStock(p)}</small></div><div class="mini-actions"><button class="edit" onclick='editProduct(${JSON.stringify(p.id)})'>✏️ Editar</button><button class="danger" onclick='deleteProduct(${JSON.stringify(p.id)})'>🗑️</button></div></div>`).join("")
+}
+renderChips();renderProducts();renderCart();
+setTimeout(()=>refreshCloudData(false),300);
+
+function openPromoter(){$('promoterModal').classList.add('show');if(promoterToken)loadPromoter();}
+async function promoterAuth(action){try{const d=await apiPost({action,username:$('promUser').value,password:$('promPass').value});promoterToken=d.token;sessionStorage.setItem('nam_promoter_token',promoterToken);$('promPass').value='';await loadPromoter();}catch(e){$('promoterMessage').textContent=e.message}}
+function promoterLogout(){promoterToken='';sessionStorage.removeItem('nam_promoter_token');$('promoterPanel').style.display='none';$('promoterAuth').style.display='block';}
+async function loadPromoter(){try{const r=await fetch(`${API_URL}?action=promoterDashboard&token=${encodeURIComponent(promoterToken)}&t=${Date.now()}`);const j=await r.json();if(!j.ok)throw Error(j.error);const d=j.data;$('promoterAuth').style.display='none';$('promoterPanel').style.display='block';const link=location.href.split('?')[0].split('#')[0]+'?ref='+encodeURIComponent(d.code);$('promoterStats').innerHTML=`<h3>Bienvenido, ${esc(d.username)}</h3><p>Tu enlace de promotor:</p><input readonly value="${esc(link)}" style="width:100%;padding:10px"><button class="btn outline" onclick='navigator.clipboard.writeText(${JSON.stringify(link)})'>Copiar enlace</button><h3>Ganado: ${money(d.earned)} · Disponible: ${money(d.available)}</h3>`;$('promoterHistory').innerHTML='<h3>Comisiones</h3>'+(d.commissions.map(c=>`<p>Pedido ${esc(c.orderId)} — ${money(c.amount)}</p>`).join('')||'<p>Aún no tienes comisiones.</p>')+'<h3>Retiros</h3>'+(d.withdrawals.map(w=>`<p>${money(w.amount)} · ${esc(w.bank)} · ${esc(w.status)}</p>`).join('')||'<p>Sin retiros.</p>');$('promoterMessage').textContent='';}catch(e){$('promoterMessage').textContent=e.message;promoterLogout();}}
+async function promoterWithdraw(){try{const d=await apiPost({action:'withdraw',token:promoterToken,bank:$('withdrawBank').value,holder:$('withdrawHolder').value,accountType:$('withdrawType').value,account:$('withdrawAccount').value,amount:$('withdrawAmount').value});alert(d.message);loadPromoter()}catch(e){alert(e.message)}}
+async function loadReferralsAdmin(){try{const r=await fetch(`${API_URL}?action=adminReferrals&token=${encodeURIComponent(adminToken)}`);const j=await r.json();if(!j.ok)throw Error(j.error);const d=j.data;$('referralsAdminData').innerHTML=`<h4>Promotores (${d.promoters.length})</h4>`+d.promoters.map(p=>`<p>${esc(p.username)} · ${esc(p.code)}</p>`).join('')+'<h4>Solicitudes de retiro</h4>'+(d.withdrawals.map(w=>`<div class="form"><b>${money(w.amount)}</b> · ${esc(w.status)}<p>Banco: ${esc(w.bank)} · ${esc(w.holder)} · ${esc(w.account)} (${esc(w.type)})</p>${w.status==='SOLICITADO'?`<button class="btn green" onclick='payWithdrawal(${JSON.stringify(w.id)})'>Marcar transferido</button>`:''}</div>`).join('')||'<p>Sin solicitudes.</p>');}catch(e){$('referralsAdminData').textContent=e.message}}
+async function payWithdrawal(id){const reference=prompt('Ingresa la referencia de la transferencia ya realizada:');if(!reference)return;try{await apiPost({action:'markWithdrawalPaid',withdrawalId:id,reference});await loadReferralsAdmin()}catch(e){alert(e.message)}}
+
+</script>
+</body>
+</html>
